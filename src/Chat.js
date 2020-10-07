@@ -5,11 +5,13 @@ import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import db from "./firebase";
 import Message from "./Message";
+import firebase from "firebase"
 
 function Chat() {
   const { roomId } = useParams();
   const [roomDetails, setRoomDetails] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     db.collection("rooms")
@@ -24,6 +26,15 @@ function Chat() {
         setMessages(snapshot.docs.map((doc) => doc.data()))
       );
   }, [roomId]);
+
+  const input = (e) => {
+    e.preventDefault();
+
+    db.collection("rooms")
+      .doc(roomId)
+      .collection("messages")
+      .add({ message: message, user: "James", timestamp: firebase.firestore.FieldValue.serverTimestamp()});
+  };
 
   return (
     <div className="chat">
@@ -51,6 +62,21 @@ function Chat() {
             userImage={message.userImage}
           />
         ))}
+      </div>
+
+      <div className="chat__messageInput">
+        <form>
+          <input
+            type="text"
+            placeholder="Enter Message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+
+          <button type="submit" onClick={input}>
+            Enter
+          </button>
+        </form>
       </div>
     </div>
   );
