@@ -3,10 +3,11 @@ import React from "react";
 import "./Header.css";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import SearchIcon from "@material-ui/icons/Search";
-import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
+import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
+import { useStateValue } from "./StateProvider";
 
 function Header() {
-  // const[{user}, dispatch] =useStateValueProvider();
+  const[{user}] =useStateValue();
   return (
     <div className="header">
       <div className="header__left">
@@ -14,8 +15,8 @@ function Header() {
 
         <Avatar
           className="header__avatar"
-          src="https://yt3.ggpht.com/a-/AOh14Gh6GBM3zHaiC58JKzfzgJX91u1axPhNppWeVGD-fA=s100-c-k-c0xffffffff-no-rj-mo"
-          alt=""
+          src={user?.photoURL}
+          alt={user?.displayName}
         />
         {/*Time Icon */}
         <AccessTimeIcon />
@@ -23,14 +24,14 @@ function Header() {
 
       <div className="header__search">
         {/*Search Icon */}
-        <SearchIcon/>
+        <SearchIcon />
 
         {/*Input */}
         <input placeholder="Search Slack" />
       </div>
 
       <div className="header__right">
-          <HelpOutlineIcon/>
+        <HelpOutlineIcon />
       </div>
     </div>
   );
