@@ -11,7 +11,7 @@ function Chat() {
   const { roomId } = useParams();
   const [roomDetails, setRoomDetails] = useState(null);
   const [messages, setMessages] = useState([]);
-  
+
   useEffect(() => {
     db.collection("rooms")
       .doc(roomId)
@@ -54,7 +54,7 @@ function Chat() {
         ))}
       </div>
 
-     <ChatInput channelName={roomDetails?.name} channelId={roomId}/>
+      <ChatInput channelName={roomDetails?.name} channelId={roomId} />
     </div>
   );
 }
