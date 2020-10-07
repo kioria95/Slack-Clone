@@ -9,12 +9,14 @@ function App() {
       {/*Header */}
       <Header />
 
-      {/*Sidebar */}
-      <Sidebar />
+      <div className="app__body">
+        {/*Sidebar */}
+        <Sidebar />
 
-      {/*Header */}
+        {/*Header */}
 
-      {/*Header */}
+        {/*Header */}
+      </div>
     </div>
   );
 }
